@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function Busqueda_Raices(){
+            var num_ingresado = parseFloat(document.getElementById("input_num").value);
+        
+            if(num_ingresado<=0 || num_ingresado >=1000){
+                alert("El valor ingresado es invalido, no se encuentra en intervalo permitido.")
+            }
+            
+            else{
+                var lim_inf = 0
+                var lim_sup = num_ingresado
+                var mitad = (lim_sup+lim_inf) / 2
+                var tolerancia = 0.000000000000000001
+                while (Math.abs(Math.pow(mitad,2) - num_ingresado) > tolerancia){
+                    if (Math.pow(mitad,2) > num_ingresado){
+                        lim_sup = mitad
+                    }
+                    else{
+                        lim_inf = mitad
+                    }
+                    mitad = (lim_sup+lim_inf) /2
+                }
+                document.getElementById('resultado').innerHTML = `La raíz de ${num_ingresado} es ${mitad}`
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Búsqueda de Raíces</h1>
+    <h2>Autor: Elmer Juarez</h2>
+    <hr>
+
+    <div class="widgets">
+        <span>Ingrese el número del cual necesita la raíz</span><br>
+        <input id="input_num" type="text" width="20"><br>
+        <div id="resultado"></div><br>
+        <button onclick="Busqueda_Raices()">Búsqueda de Raíces</button>
+        <hr>
+    </div>
+
+</body>
+</html>

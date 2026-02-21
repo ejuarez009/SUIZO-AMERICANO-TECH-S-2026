@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function crear_vector(){
+            var size = document.getElementById('entry1').value
+            vector = new Array(size)
+            for (var i=0; i<size; i++){
+                vector[i] = Math.trunc(Math.random()*900+100)
+            }
+            document.getElementById('label_vector').innerHTML = `El vector generado es ${vector}`
+        }
+
+        function sort_rank(){
+            len_vec = vector.length
+            orden_vec = new Array(len_vec)
+            for (let i=0; i<len_vec; i++){
+                cont_min = 0 
+                for (let j =0; j<len_vec;j++){
+                    if (vector[i]<vector[j] || vector[i]==vector[j] && j > i){
+                        cont_min ++ 
+                    }
+                    orden_vec[cont_min] = vector[i]
+                }
+            }
+            documen.getElementById('label_order_vec').innerHTML = `El vector ordenado es: ${orden_vec}`
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+    <h1>Sort de Conteo</h1>
+    <br />
+    Tamaño del vector 
+    <input type="text" value="20" id="entry1">
+    <input type="button" onclick="crear_vector()", value="Crear Vector"><br>
+    <span id="label_vector"></span>
+    <br />
+    <button onclick="sort_rank()">Ordenamiento por Rankeo</button>
+    <span id="label_order_vec"></span>
+
+
+</body>
+</html>

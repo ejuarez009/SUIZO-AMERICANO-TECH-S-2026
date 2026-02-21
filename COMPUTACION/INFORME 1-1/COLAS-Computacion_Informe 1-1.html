@@ -1,0 +1,147 @@
+<!--#=========================================================DCOUMENTACION INTERNA====================================================================================
+# -- Objetivo: Crear una aplicacion grafica que simule el funcionamiento de una cola (FIFO) con operaciones de encolar, desencolar y verificar si la cola esta vacia.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descipcion: Utilizar una clase en la cual se realizan las 3 funciones de una cola, y una clase principal que maneja la interfaz grafica con Tkinter.
+# -- Recursos: Lenguaje de programacion: JavaScript, HTML, CSS
+# -- Procesos: Uso de un vector de botones para representar los elementos de la cola, y manejo de excepciones para condiciones de overflow y underflow.
+# -- Historia: Fecha de creacion 01/02/2026 Fecha de modificacion: 04/02/2026
+# -- Ajustes pendientes: Ninguno 
+# ================================================================================================================================================================== -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Colas</title>
+
+    <style>
+        body { font-family: Arial; }
+
+        .fila { margin-bottom: 8px; }
+
+        .titulo {
+            width: 90px;
+            display: inline-block;
+        }
+
+        .caja {
+            width: 28px;
+            height: 28px;
+            border: 1px solid black;
+            display: inline-block;
+            text-align: center;
+            line-height: 28px;
+            background-color: #eee;
+        }
+
+        .verde {
+            background-color: lightgreen;
+        }
+    </style>
+
+    <script>
+            let colas = [];
+
+            window.onload = function () {
+
+                for (let i = 0; i < 10; i++) {
+                    colas[i] = [];
+
+                    let fila = document.createElement("div");
+                    fila.className = "fila";
+
+                    let titulo = document.createElement("span");
+                    titulo.className = "titulo";
+                    titulo.textContent = "Cola " + (i + 1) + ":";
+
+                    fila.appendChild(titulo);
+
+                    for (let j = 0; j < 10; j++) {
+                        let caja = document.createElement("div");
+                        caja.className = "caja";
+                        caja.id = "c" + i + "_" + j;
+                        fila.appendChild(caja);
+                    }
+
+                    document.getElementById("colas").appendChild(fila);
+                }
+            };
+
+            function enqueue() {
+                let valor = document.getElementById("valor").value;
+                let n = document.getElementById("colaNum").value - 1;
+
+                if (valor === "") {
+                    alert("Ingrese un valor");
+                    return;
+                }
+
+                if (colas[n].length === 10) {
+                    alert("Overflow Queue");
+                    return;
+                }
+
+                colas[n].push(valor);
+                actualizarCola(n);
+            }
+
+            function dequeue() {
+                let n = document.getElementById("colaNum").value - 1;
+
+                if (colas[n].length === 0) {
+                    alert("Underflow Queue");
+                    return;
+                }
+
+                let eliminado = colas[n].shift();
+                actualizarCola(n);
+                alert("Se sacó: " + eliminado);
+            }
+
+            function empty() {
+                let n = document.getElementById("colaNum").value - 1;
+
+                if (colas[n].length === 0) {
+                    alert("La cola está vacía");
+                } else {
+                    alert("La cola tiene elementos");
+                }
+            }
+
+            function actualizarCola(n) {
+                for (let i = 0; i < 10; i++) {
+                    let caja = document.getElementById("c" + n + "_" + i);
+                    caja.textContent = colas[n][i] || "";
+                    caja.className = "caja";
+
+                    if (colas[n][i]) {
+                        caja.classList.add("verde");
+                    }
+                }
+            }
+    </script>
+</head>
+
+    <body>
+
+        <h1>Simulación de Colas</h1>
+        <h2>Autor: Elmer Juarez</h2>
+        <div id="colas"></div>
+
+        <hr>
+
+        <label>Número a encolar:</label>
+        <input type="text" id="valor">
+
+        <br><br>
+
+        <label>Cola (1 - 10):</label>
+        <input type="number" id="colaNum" min="1" max="10" value="1">
+
+        <br><br>
+
+        <button onclick="enqueue()">Enqueue</button>
+        <button onclick="dequeue()">Dequeue</button>
+        <button onclick="empty()">Empty</button>
+
+    </body>
+</html>
