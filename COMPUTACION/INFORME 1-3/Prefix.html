@@ -1,3 +1,21 @@
+<!--=========================================================DOCUMENTACION INTERNA=================================================================================================
+# -- Objetivo: Implementar un programa que permita al usuario ingresar una expresión en notación prefix y calcular su resultado.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descripción: El programa permite al usuario ingresar una expresión en notación prefix, calcular su resultado y mostrarlo en una interfaz gráfica.
+# -- Lenguaje: HTML, Javascript y CSS
+# -- Recursos: Navegador Web.
+# -- Procesos: 
+#       1. El usuario ingresa una expresión en notación prefix.
+#       2. El programa evalúa la expresión y calcula su resultado.
+#       3. El resultado se muestra en la interfaz gráfica.
+# -- Historia: 
+#       Fecha de creación: 24/04/2026
+#       Fecha de modificación: 26/04/2026
+# -- Ajustes pendientes: Mejorar la visualización de expresiones largas, agregar más operadores.
+# -- Cambios Realizados: Implementación del cálculo de expresiones prefix, además de que se agregó un mejor CSS
+# ======================================================================================================================================================================================-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +61,8 @@
         }
         #output{
             margin-top:.8rem;
-            font-weight:600
+            font-weight:600;
+            color: #000000;
         }
     </style>
 </head>
@@ -55,7 +74,7 @@
         <label for="input">Ingrese la Expresion Prefix</label>
         <input id="input" type="text">
         <button onclick="call_prefix()">Resolver Expresion</button>
-        <br>
+        <br><br>
         <label for="output">El resultado de la expresion es:</label>
         <div id="output"></div>
     </div>

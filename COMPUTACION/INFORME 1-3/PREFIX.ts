@@ -1,16 +1,19 @@
+
+//@ts-ignore
 let pos = 0; 
-function call_prefix(){
-    const input = document.getElementById('input') as HTMLInputElement | null;
+// @ts-ignore
+function call_prefix(){ 
+    const input = document.getElementById('input') as HTMLInputElement;
     const output = document.getElementById('output');
     if (!input || !output){return};
     pos = -1;
-    const expresion: string = input.value;
+    const expresion = input.value;
     const resultado = prefix(expresion); 
     
-    output.textContent = String(resultado);
+    output.textContent = String(resultado); 
 }
-
-function prefix(expresion:string){
+// @ts-ignore
+function prefix(expresion){
     pos += 1
     let char = expresion[pos]
     if (char == "V"){

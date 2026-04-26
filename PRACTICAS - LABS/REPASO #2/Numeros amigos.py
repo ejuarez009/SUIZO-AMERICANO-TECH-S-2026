@@ -1,20 +1,20 @@
-from tkinter import * 
+import tkinter 
 
-class app(Tk): 
+class app(tkinter.Tk): 
     def __init__(self): 
         super().__init__()
         self.geometry("300x300")
         
-        Label(text="Ingrese el número 1:").pack()
-        self.entry_num1 = Entry(width=10)
+        tkinter.Label(text="Ingrese el número 1:").pack()
+        self.entry_num1 = tkinter.Entry(width=10)
         self.entry_num1.pack()
-        Label(text="Ingrese el número 2:").pack()
-        self.entry_num2 = Entry(width=10)
+        tkinter.Label(text="Ingrese el número 2:").pack()
+        self.entry_num2 = tkinter.Entry(width=10)
         self.entry_num2.pack()
         
-        Button(text="Numeros Amigos", command=self.mandar).pack()
+        tkinter.Button(text="Numeros Amigos", command=self.mandar).pack()
         
-        self.label_reult = Label(text="")
+        self.label_reult = tkinter.Label(text="")
         self.label_reult.pack()
         
     

@@ -1,4 +1,4 @@
-from tkinter import*; from tkinter import filedialog as fd; from tkinter import messagebox as mb 
+from tkinter import*; from tkinter import filedialog as fd; from tkinter import messagebox as mb #type: ignore
 from time import sleep
 
 
@@ -131,7 +131,7 @@ class Laberintos(Tk):
         if self.cubito != None: 
             self.cubito = self.canva.create_rectangle(px*10, py*13, px*10+10, py*13+13, fill="blue")
         else: 
-            self.canva.coords(self.cubito,px*10, py*13, px*10+10, py*13+13)
+            self.canva.coords(self.cubito, px*10, py*13, px*10+10, py*13+13) #type: ignore
         
         self.update()
         sleep(0.9)
