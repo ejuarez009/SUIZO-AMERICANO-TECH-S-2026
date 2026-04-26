@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="PREFIX.js"></script>
+    <style>
+        body{
+            font-family:'Segoe UI',
+            sans-serif;background:#f7f7f7;
+            color:#222;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-start;
+            min-height:100vh;
+            padding-top:40px;
+            margin:0
+        }
+        h1{
+            margin:0;
+            font-size:2rem
+        }
+        h2{
+            margin:.3rem 0 1rem;
+            color:#666;
+            font-weight:400;
+            font-size:1rem
+        }
+        .objetos{
+            background:#73b3e3;
+            padding:1.2rem;
+            border:1px solid #e5e5e5;
+            border-radius:10px;
+            max-width:420px;
+            width:90%
+        }
+        input,button{
+            padding:.55rem;
+            border:1px solid #d0d0d0;
+            border-radius:6px
+        }
+        #output{
+            margin-top:.8rem;
+            font-weight:600
+        }
+    </style>
+</head>
+<body>
+    <h1>Expresiones Prefix</h1>
+    <h2>Autor: Elmer Juarez C5A</h2>
+    <hr>
+    <div class="objetos">
+        <label for="input">Ingrese la Expresion Prefix</label>
+        <input id="input" type="text">
+        <button onclick="call_prefix()">Resolver Expresion</button>
+        <br>
+        <label for="output">El resultado de la expresion es:</label>
+        <div id="output"></div>
+    </div>
+    
+
+
+</body>
+</html>

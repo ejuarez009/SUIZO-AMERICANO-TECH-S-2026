@@ -1,0 +1,89 @@
+<!--#=========================================================DCOUMENTACION INTERNA=======================================================================================================================================================
+# -- Objetivo: Implementar el algoritmo de MERGE.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descipcion: El algoritmo de Merge es un método eficiente para combinar dos vectores ordenados en un solo vector ordenado. El proceso implica comparar los elementos de ambas listas y fusionarlos en uno nuevo vector, manteniendo el orden. 
+# -- Lenguaje: JavaScript y HTML para la interfaz gráfica.
+# -- Recursos: Navegador Web
+# -- Procesos: 
+#    1. Agregar un valor centinela para cada vector.
+#    2. Comparar los elementos de ambos vectores y fusionarlos en un nuevo vector ordenado, mediante un ciclo que va iniciar desde 0 hasta la longitud del nuevo vector.
+        a. Si el elemento del primer vector es menor o igual al elemento del segundo vector, se agrega el elemento del primer vector al nuevo vector y se incrementa el índice del primer vector.
+        b. Si el elemento del segundo vector es menor que el elemento del primer vector, se agrega el elemento del segundo vector al nuevo vector y se incrementa el índice del segundo vector.
+# -- Historia: Fecha de creacion 03/03/2026 Fecha de modificacion: 05/03/2026
+# -- Ajustes pendientes: Ninguno 
+# ======================================================================================================================================================================================================================================-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="MERGE_ver-beta-final.js"></script> <!--Enlazamos el archivo de JS-->
+    <style>
+        body {
+            background-color: bisque;
+            font-family: Arial, sans-serif; /* Cambia a una fuente más limpia */
+            padding: 20px; /* Da un poco de respiro a los bordes de la pantalla */
+        }
+        
+        h1, h2 {
+            color: #333; /* Oscurece un poco los títulos para que resalten */
+            margin-bottom: 5px;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 8px;
+            margin-bottom: 15px; /* Separa los inputs del siguiente elemento */
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Suaviza las esquinas de las cajas de texto */
+        }
+
+        .outputs {
+            font-size: 18px;
+            font-weight: bold;
+            color: #444;
+            display: block; /* Hace que se comporten como bloques para mantener el orden */
+            margin-top: 10px; /* Da separación entre los resultados */
+        }
+
+        button {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgb(209, 184, 152);
+            border: none;
+            border-radius: 5px; /* Botones con esquinas suaves */
+            padding: 10px 20px;
+            margin-top: 20px; /* Separa los botones de los resultados de arriba */
+            margin-right: 10px; /* Separa los botones entre sí */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(189, 164, 132); /* Oscurece el botón al pasar el mouse */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Algoritmo de Merge</h1>
+    <h2>Autor: Elmer Juarez</h2>
+    <hr>
+    <label for="input_size1">Tamaño del vector 1:</label>
+    <input type="text" id="input_size1" placeholder="Tamaño para el vector 1"><br>
+    
+    <label for="input_size2">Tamaño del vector 2:</label>
+    <input type="text" id="input_size2" placeholder="Tamaño para el vector 2"><br>
+    
+    <span id="output_vector1" class="outputs"></span>
+    <span id="output_vector2" class="outputs"></span>
+    <span id="output_merge_trap" class="outputs"></span>
+    <span id="output_merge" class="outputs"></span>
+    
+    <button onclick="create_vector()">Crear Vectores</button>
+    <button onclick="Merge_Trap()">Aplicar Merge #1</button>
+    <button onclick="Merge()">Aplicar Merge #2</button>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!--#=========================================================DCOUMENTACION INTERNA=======================================================================================================================================================
+# -- Objetivo: Implementar los algoritmos de Factorial y Fibonacci en recursion e iteracion.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descipcion: Los algoritmos de Factorial y Fibonacci son métodos para calcular el factorial de un número y la secuencia de Fibonacci, respectivamente. Se implementan tanto de manera recursiva como iterativa para comparar su eficiencia y funcionamiento.
+# -- Lenguaje: JavaScript y HTML para la interfaz gráfica.
+# -- Recursos: Navegador Web
+# -- Procesos: 
+#    1. Implementar la función factorial de manera recursiva.
+#    2. Implementar la función factorial de manera iterativa.
+#    3. Implementar la función Fibonacci de manera recursiva.
+#    4. Implementar la función Fibonacci de manera iterativa.
+# -- Historia: Fecha de creacion 14/03/2026 Fecha de modificacion: 16/03/2026
+# -- Ajustes pendientes: Ninguno 
+# ======================================================================================================================================================================================================================================-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Funciones Recursivas e Iterativas</title>
+    <script src="Iteracion vs Recursion_Informe 1-2.js"></script>
+    <style>
+        body{
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        margin-top: 50px;
+        }
+
+        h2{
+            color: #333;
+        }
+
+        h3{
+            margin-top: 30px;
+            color: #444;
+        }
+
+        input{
+            padding: 8px;
+            font-size: 16px;
+            width: 150px;
+            text-align: center;
+        }
+
+        button{
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover{
+            background-color: #45a049;
+        }
+
+        span{
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Factorial y Fibonacci</h1>
+    <h2>Autor: Elmer Juarez</h2>
+
+    <p>Ingrese un número:</p>
+    <input type="number" id="input_num">
+
+    <br><br>
+
+    <h2>Funciones Recursivas</h2>
+    <span id="span_rfact"></span>
+    <button onclick="call_rfact()">Factorial Recursivo</button>
+    
+
+    <br>
+    <span id="span_rfib"></span>
+    <button onclick="call_rfibo()">Fibonacci Recursivo</button>
+    
+    <br><br>
+    <h2>Funciones Iterativas</h2>
+    <span id="span_fact_ite"></span>
+    <button onclick="ite_fact()">Factorial Iterativo</button>
+    
+    <br>
+    <span id="span_fibo_ite"></span>
+    <button onclick="ite_fibo()">Fibonacci Iterativo</button>
+    
+</body>
+</html>

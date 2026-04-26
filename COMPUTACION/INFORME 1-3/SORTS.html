@@ -1,0 +1,351 @@
+<!--#=========================================================DOCUMENTACION INTERNA=================================================================================================
+# -- Objetivo: Implementar y comparar distintos algoritmos de ordenamiento (Burbuja, Inserción, Conteo, Selección y Quicksort) sobre un vector generado aleatoriamente.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descripción: El programa permite al usuario ingresar el tamaño de un vector, generarlo con números aleatorios de 3 dígitos y aplicar distintos algoritmos de ordenamiento.
+#                  Muestra los resultados ordenados, el tiempo de ejecución, el número de comparaciones y movimientos en una interfaz gráfica construida con Tkinter.
+# -- Lenguaje: HTML, Javascript y CSS
+# -- Recursos: Navegador Web.
+# -- Procesos: 
+#       1. El usuario ingresa el tamaño del vector.
+#       2. Se genera un vector de números aleatorios de 3 dígitos.
+#       3. El usuario puede ordenar el vector con cualquiera de los cuatro algoritmos disponibles.
+#       4. Cada algoritmo muestra el vector ordenado en un Text box, junto con el número de comparaciones, movimientos y tiempo de ejecución.
+# -- Historia: 
+#       Fecha de creación: 13/02/2026
+#       Fecha de modificación: 12/04/2026
+# -- Ajustes pendientes: Mejorar la visualización de vectores grandes, agregar más algoritmos de ordenamiento.
+# -- Cambios Realizados: Complementacion con el algoritmo de quikcsort, ademáas de que se agrego un mejor CSS
+# ======================================================================================================================================================================================-->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SORTS - ELMER JUAREZ</title>
+    <style>
+        body {
+        font-family: monospace;
+        background: #1a1a1a;
+        color: #e0e0e0;
+        padding: 2rem;
+        }
+
+        input, button {
+        font-family: monospace;
+        background: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #444;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 4px;
+        }
+
+        button:hover { background: #3a3a3a; }
+
+        #label_vector {
+        color: #f7f7f7;
+        font-size: 13px;
+        margin: 1rem 0;
+        word-break: break-all;
+        }
+
+        .sorts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+        }
+
+        .sort-card {
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 6px;
+        padding: 1rem;
+        }
+
+        .sort-card h3 {
+        font-size: 13px;
+        color: #aaa;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        }
+
+        .sort-card div {
+        font-size: 13px;
+        line-height: 2;
+        }
+
+
+    </style>
+
+    <script>
+        let vector = []
+
+        // ===================== GENERAR VECTOR =====================
+        function crear_vector(){
+            let size = Number(document.getElementById("entry1").value)
+
+            if (Number.isNaN(size) || size <= 0){
+                alert("Ingresa un número válido")
+                return
+            }
+
+            vector = new Array(size)
+
+            for (let i = 0; i < size; i++){
+                vector[i] = Math.trunc(Math.random()*900 + 100)
+            }
+
+            document.getElementById("label_vector").innerHTML =
+                "Vector generado: [" + vector.join(", ") + "]"
+
+            limpiar_resultados()
+        }
+
+        // ===================== LIMPIAR =====================
+        function limpiar_resultados(){
+            document.getElementById("res_burbuja").innerHTML = ""
+            document.getElementById("res_insercion").innerHTML = ""
+            document.getElementById("res_conteo").innerHTML = ""
+            document.getElementById("res_seleccion").innerHTML = ""
+            document.getElementById("res_quicksort").innerHTML = ""
+        }
+
+        // ===================== BURBUJA =====================
+        function sort_burbuja(){
+
+            let arr = [...vector]
+            if (!arr.length){
+                alert("Debe crear el vector primero")
+                return 
+            }
+            let comp = 0
+            let mov = 0
+
+            let inicio = performance.now()
+
+            for (let i = 0; i < arr.length; i++){
+                for (let j = 0; j < arr.length-i-1; j++){
+                    mov++
+                    if (arr[j] > arr[j+1]){
+                        [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+                        comp++
+                    }
+                }
+            }
+
+            let tiempo = (performance.now() - inicio)
+
+            document.getElementById("res_burbuja").innerHTML =
+                `Vector: [${arr.join(", ")}] <br>
+                Comparaciones: ${comp} <br>
+                Movimientos: ${mov} <br>
+                Tiempo: ${tiempo.toFixed(8)} ms`
+        }
+
+        // ===================== INSERCION =====================
+        function sort_insercion(){
+
+            let arr = [...vector]
+            if (!arr.length){
+                alert("Debe crear el vector primero")
+                return 
+            }
+            let comp = 0
+            let mov = 0
+
+            let inicio = performance.now()
+
+            for (let i = 1; i < arr.length; i++){
+                let j = i
+                mov++
+                while (j > 0 && arr[j-1] > arr[j]){
+                    [arr[j], arr[j-1]] = [arr[j-1], arr[j]]
+                    comp++
+                    j--
+                }
+            }
+
+            let tiempo = (performance.now() - inicio)
+
+            document.getElementById("res_insercion").innerHTML =
+                `Vector: [${arr.join(", ")}] <br>
+                Comparaciones: ${comp} <br>
+                Movimientos: ${mov} <br>
+                Tiempo: ${tiempo.toFixed(8)} ms`
+        }
+
+        // ===================== CONTEO (RANK) =====================
+        function sort_conteo(){
+
+            let arr = [...vector]
+            if (!arr.length){
+                alert("Debe crear el vector primero")
+                return 
+            }
+            let n = arr.length
+            let nuevo = new Array(n)
+            let comp = 0
+            let mov = 0
+
+            let inicio = performance.now()
+
+            for (let i = 0; i < n; i++){
+                let cont = 0
+                for (let j = 0; j < n; j++){
+                    mov++
+                    if (arr[j] < arr[i] || (arr[j] == arr[i] && j > i)){
+                        cont++
+                        comp++
+                    }
+                }
+                nuevo[cont] = arr[i]
+            }
+
+            let tiempo = (performance.now() - inicio)
+
+            document.getElementById("res_conteo").innerHTML =
+                `Vector: [${nuevo.join(", ")}] <br>
+                Comparaciones: ${comp} <br>
+                Movimientos: ${mov} <br>
+                Tiempo: ${tiempo.toFixed(8)} ms`
+        }
+
+        // ===================== SELECCION =====================
+        function sort_seleccion(){
+
+            let arr = [...vector]
+            if (!arr.length){
+                alert("Debe crear el vector primero")
+                return 
+            }
+            let comp = 0
+            let mov = 0
+
+            let inicio = performance.now()
+
+            for (let i = 0; i < arr.length-1; i++){
+                let min = i
+                for (let j = i+1; j < arr.length; j++){
+                    mov++
+                    if (arr[j] < arr[min]){
+                        min = j
+                        comp++
+                    }
+                }
+                [arr[i], arr[min]] = [arr[min], arr[i]]
+            }
+
+            let tiempo = (performance.now() - inicio)
+
+            document.getElementById("res_seleccion").innerHTML =
+                `Vector: [${arr.join(", ")}] <br>
+                Comparaciones: ${comp} <br>
+                Movimientos: ${mov} <br>
+                Tiempo: ${tiempo.toFixed(8)} ms`
+        }
+
+
+        // ========================= QUICK SORT==========================
+        function call_quicksort() {
+            const arr = [...vector];
+            if (!arr.length){
+                alert("Debe crear el vector primero")
+                return 
+            }
+            const metrics = { comp: 0, movs: 0 };
+
+            let inicio = performance.now();
+            let resultado = quicksort(arr, metrics);
+            let tiempo = performance.now() - inicio;
+
+            document.getElementById("res_quicksort").innerHTML =
+                `Vector: [${resultado.join(", ")}] <br>
+                Comparaciones: ${metrics.comp} <br>
+                Movimientos: ${metrics.movs} <br>
+                Tiempo: ${tiempo.toFixed(8)} ms`
+        }
+
+        function quicksort(vector, metrics) {
+            if (vector.length <= 1) {
+                return vector;
+            }
+            else {
+                let pos = Math.trunc((vector.length) / 2);
+                let pivote = vector[pos];
+                const mayores = [];
+                const menores = [];
+
+                for (let i = 0; i < pos; i++) {
+                    metrics.comp++;
+                    if (pivote < vector[i]) {
+                        mayores.push(vector[i]);
+                        metrics.movs++;
+                    }
+                    else {
+                        menores.push(vector[i]);
+                        metrics.movs++;
+                    }
+                }
+                for (let i = pos + 1; i < vector.length; i++) {
+                    metrics.comp++;
+                    if (pivote < vector[i]) {
+                        mayores.push(vector[i]);
+                        metrics.movs++;
+                    }
+                    else {
+                        menores.push(vector[i]);
+                        metrics.movs++;
+                    }
+                }
+                return [...quicksort(menores, metrics), pivote, ...quicksort(mayores, metrics)];
+            }
+        }
+
+    </script>
+</head>
+
+    <body>
+        <h1>Sorts de Ordenamiento</h1>
+        <h2>Autor: Elmer Juarez - C5A</h2>
+        <input type="number" id="entry1" placeholder="Tamaño del vector" />
+        <button onclick="crear_vector()">Generar vector</button>
+
+        <div id="label_vector"></div>
+
+        <div class="sorts-grid">
+        <div class="sort-card">
+            <h3>Burbuja</h3>
+            <button onclick="sort_burbuja()">Ordenar</button>
+            <div id="res_burbuja"></div>
+        </div>
+
+        <div class="sort-card">
+            <h3>Inserción</h3>
+            <button onclick="sort_insercion()">Ordenar</button>
+            <div id="res_insercion"></div>
+        </div>
+
+        <div class="sort-card">
+            <h3>Selección</h3>
+            <button onclick="sort_seleccion()">Ordenar</button>
+            <div id="res_seleccion"></div>
+        </div>
+
+        <div class="sort-card">
+            <h3>Conteo</h3>
+            <button onclick="sort_conteo()">Ordenar</button>
+            <div id="res_conteo"></div>
+        </div>
+
+        <div class="sort-card">
+            <h3>Quicksort</h3>
+            <button onclick="call_quicksort()">Ordenar</button>
+            <div id="res_quicksort"></div>
+        </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let gvector = []
+        function crear(){
+            let tamaño = Number(document.getElementById('input_tam').value)
+            let vector = new Array(tamaño)
+            for(let i=0;i<tamaño;i++){
+                vector[i] = Math.trunc(Math.random()*10)
+            }
+            document.getElementById('vector').innerHTML = `El vector creado es: ${vector}`
+            gvector = vector
+        }
+
+        let gvector_orden = []
+        function orden(){
+            let ordenado = quick(gvector)
+            document.getElementById('ordenado').innerHTML = `El vector ordenado es: ${[...ordenado]}`
+            gvector_orden = [...ordenado]
+        }
+
+        
+
+        function quick(vector){
+            if (vector.length <= 1){
+                return vector
+            }
+            else{
+                let pos = Math.trunc((vector.length)/2)
+                let pivote = vector[pos]
+                let mayores = []
+                let menores = []
+                for (let i=0;i<pos;i++){
+                    if (pivote < vector[i]){
+                        mayores.push(vector[i])
+                    }
+                    else{
+                        menores.push(vector[i])
+                    }
+                }
+                for (let i=pos+1;i<vector.length;i++){
+                    if (pivote < vector[i]){
+                        mayores.push(vector[i])
+                    }
+                    else{
+                        menores.push(vector[i])
+                    }
+                }
+                return quick(menores) + [pivote] + quick(mayores)
+            }
+        }
+        
+
+        function busc(){
+            let numero = Number(document.getElementById('input_num').value)
+            let li = 0
+            let ls = gvector_orden.length - 1 
+            let vector_ordenado = gvector_orden
+            let encontrado = bbinaria(vector_ordenado, numero, li,ls)
+            document.getElementById('numero').innerHTML = encontrado
+        }
+
+        function bbinaria(vector, num, li, ls){
+            if (li>ls){
+                return "No encontrado"
+            } 
+            else{
+                let mitad = Math.trunc((ls+li)/2)
+                if (vector[mitad] == num){
+                    return "Número econtrado"
+                }
+                else{
+                    if (vector[mitad] < num){
+                        ls = mitad - 1
+                        return bbinaria(vector,num,li,ls)
+                    }
+                    else{
+                        li = mitad + 1
+                        return bbinaria(vector,num,li,ls)
+                    }
+                }
+
+            }
+        
+        }
+
+
+    </script>
+</head>
+<body>
+    <label>Ingrese el tamaño del vector:</label>
+    <input id="input_tam" type="number">
+    <button onclick="crear()">Crear Vector</button>
+    <button onclick="orden()">Vector ordenado</button><br>
+
+    <label>Ingrese el numero a buscar:</label>
+    <input id="input_num" type="text">
+    <button onclick="busc()">Buscar Numero</button>
+
+    <hr>
+    <textarea id="vector" rows="10", cols="25"></textarea>
+    <textarea id="ordenado" rows="10" cols="25"></textarea>
+    <textarea id="numero" rows="10" cols="25"></textarea>
+</body>
+</html>

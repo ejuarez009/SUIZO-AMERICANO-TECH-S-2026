@@ -1,0 +1,70 @@
+<!--// #=========================================================DCOUMENTACION INTERNA=======================================================================================================================================================
+// # -- Objetivo: Resolver el problema de calcular la potencia de un número utilizando tanto iteración como recursión, y comparar los resultados obtenidos por ambos métodos.
+// # -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+// # -- Descipcion: Los algoritmos de potencia son métodos para calcular la potencia de un número. Se implementan tanto de manera recursiva como iterativa para comparar su eficiencia y funcionamiento.
+// # -- Lenguaje: JavaScript y HTML para la interfaz gráfica.
+// # -- Recursos: Navegador Web
+// # -- Procesos: 
+// #    1. Implementar la función de potencia de manera recursiva.
+// #    2. Implementar la función de potencia de manera iterativa.
+// # -- Historia: Fecha de creacion 18/03/2026 Fecha de modificacion: 20/03/2026
+// # -- Ajustes pendientes: Ninguno 
+// # ======================================================================================================================================================================================================================================-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Tarea_3_Potencia log2.js"></script>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f0f0f0;
+            margin: 20px;
+        }
+        h1, h2{
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output_ite, #output_rec {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>x^n recursivo O(log2(n)) - Iteracion / Recursion</h1>
+    <h2>Autor: Elmer Juarez - C5A</h2>
+    <hr>
+    <p>Ingresa la base:</p>
+    <input text="number", id="input_base"><br>
+    <p>Ingresa el exponente:</p>
+    <input text="number", id="input_exponente"><br><br>
+    <button onclick="ite_log2()">Calcular en iteracion</button><br> 
+    <button onclick="call_log2()">Calcular en recursion</button><br>
+    <hr>
+    <div id="output_ite"></div><br>
+    <div id="output_rec"></div>
+    
+</body>
+</html>

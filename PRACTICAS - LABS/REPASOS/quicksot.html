@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        let  vector_global = []
+        function crear_vector(){
+            let tamaño = Number(document.getElementById('input_tamaño').value)
+            console.log(tamaño)
+            let vector = new Array(tamaño)
+            for(let i=0; i<tamaño;i++ ){
+                vector[i] = Math.trunc(Math.random()*10)
+            }
+            console.log(vector)
+            vector_global = vector
+        }
+
+        function call_quick(){
+            let ordenado = quicksort(vector_global)
+            let ordenado_vector = Array.from(ordenado)
+            document.getElementById('vector_ordenado').innerHTML = "El vector ordenado es:" + "["+ordenado_vector+"]"
+        }
+
+        function quicksort(vector){
+            if (vector.length<=1){
+                return vector
+            }
+            else{
+                let pos_pivote = Math.trunc((vector.length)/2)
+                let pivote = vector[pos_pivote]
+                let mayores = []
+                let menores = []
+                for (let i=0; i<pos_pivote;i++){
+                    if (vector[i] < pivote){
+                        menores.push(vector[i])
+                    }
+                    else{
+                        mayores.push(vector[i])
+                    }
+                }
+                for (let i=pos_pivote+1; i<vector.length;i++){
+                    if (vector[i] < pivote){
+                        menores.push(vector[i])
+                    }
+                    else{
+                        mayores.push(vector[i])
+                    }
+                }
+                return quicksort(menores) + [pivote] + quicksort(mayores)
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+    
+    <label>Ingrese el tamaño:</label>
+    <input id="input_tamaño" type="number">
+    <span id="vector"></span>
+    <button onclick="crear_vector()">Crear Vector</button>
+    <button onclick="call_quick()">Ordenar Vector</button>
+    <hr>
+    <textarea id="vector_ordenado" rows="10" cols="40"></textarea>
+
+</body>
+</html>

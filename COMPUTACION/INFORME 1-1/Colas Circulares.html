@@ -1,0 +1,151 @@
+<!--#=========================================================DCOUMENTACION INTERNA====================================================================================
+# -- Objetivo: Crear una aplicacion grafica que simule el funcionamiento de una cola circular con operaciones de encolar, desencolar y verificar si la cola esta vacia.
+# -- Autor: Elmer Juarez / Correo de contacto: e24.elmerjuarez.juareza@suizoamaericano.edu.gt
+# -- Descipcion: Utilizar una clase en la cual se realizan las 3 funciones de una cola, y una clase principal que maneja la interfaz grafica con Tkinter.
+# -- Recursos: Libreria, Widgets Tkinter 
+# -- Procesos: Uso de un vector de botones para representar los elementos de la cola circular, y manejo de excepciones para condiciones de overflow y underflow.
+# -- Historia: Fecha de creacion 19/02/2026 Fecha de modificacion: 21/02/2026
+# -- Ajustes pendientes: Ninguno 
+# ================================================================================================================================================================== -->
+<script>
+//==================== VARIABLES GLOBALES ====================
+var queue = new Array(10).fill("");
+var num_elemen = 0;
+var inicio = 0;
+
+//==================== CREAR CIRCULO ====================
+function crearCola(){
+    var contenedor = document.getElementById("cola");
+
+    var centro = 170;
+    var radio = 150;
+    var paso = (2 * Math.PI) / 10;
+
+    for(var i=0; i<10; i++){
+        var angulo = paso * i;
+
+        var px = centro + radio * Math.cos(angulo);
+        var py = centro + radio * Math.sin(angulo);
+
+        var btn = document.createElement("button");
+        btn.id = "pos"+i;
+        btn.className = "caja";
+        btn.innerHTML = "";
+
+        btn.style.left = px + "px";
+        btn.style.top = py + "px";
+
+        contenedor.appendChild(btn);
+    }
+}
+
+//==================== ENCOLAR ====================
+function enqueue(){
+    var valor = document.getElementById("dato").value;
+
+    if(valor === ""){
+        alert("DATOS INVALIDOS");
+        return;
+    }
+
+    if(num_elemen < 10){
+        var final = (inicio + num_elemen) % 10;
+
+        queue[final] = valor;
+        document.getElementById("pos"+final).innerHTML = valor;
+
+        num_elemen++;
+    }else{
+        alert("Queue Overflow");
+    }
+}
+
+//==================== DESENCOLAR ====================
+function dequeue(){
+    if(num_elemen > 0){
+
+        document.getElementById("pos"+inicio).innerHTML = "";
+        queue[inicio] = "";
+
+        inicio = (inicio + 1) % 10;
+        num_elemen--;
+
+    }else{
+        alert("Queue Underflow");
+    }
+}
+
+//==================== EMPTY ====================
+function emptyQueue(){
+    if(num_elemen == 0){
+        alert("La cola esta vacia");
+    }else{
+        alert("La cola NO esta vacia");
+    }
+}
+
+window.onload = crearCola;
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{
+        background-color: lightblue;
+        font-family: Arial;
+    }
+
+    /* contenedor del circulo */
+    #cola{
+        position: relative;
+        width: 400px;
+        height: 400px;
+        background-color: white;
+        border: 2px solid black;
+        margin: 20px;
+        float: left;
+    }
+
+    /* botones de la cola */
+    .caja{
+        position: absolute;
+        width: 50px;
+        height: 30px;
+        background-color: lightgray;
+    }
+
+    /* panel de control */
+    #panel{
+        width: 450px;
+        height: 220px;
+        background-color: pink;
+        float: left;
+        padding: 20px;
+    }
+    </style>
+
+</head>
+    <body>
+
+    <h2>COLA CIRCULAR - ELMER JUAREZ C5</h2>
+
+    <div id="cola"></div>
+
+    <div id="panel">
+        <p><b>Ingrese el numero para la cola:</b></p>
+        <input type="text" id="dato">
+
+        <br><br>
+
+        <button onclick="enqueue()" style="width:130px;height:70px;">ENCOLAR</button>
+        <button onclick="dequeue()" style="width:130px;height:70px;">DESENCOLAR</button>
+        <button onclick="emptyQueue()" style="width:130px;height:70px;">EMPTY</button>
+    </div>
+
+    </body>
+</html>
