@@ -52,11 +52,11 @@ function prefix(expresion) {
         if (char == "|") {
             let post = prefix(expresion);
             let prev = prefix(expresion);
-            if (post == "F" || prev == "F") {
-                return "Es Falso";
+            if (post == "V" || prev == "V") {
+                return "Es verdadero";
             }
             else {
-                return "Es Verdadero";
+                return "Es falso";
             }
         }
         if (char == "!") {
