@@ -44,8 +44,8 @@ class app(Tk):
         return (num1 == acu2) \
             and (num2 == acu1) #Los parentesis garantizan el orden de la comparacion # \: Continuacion de linea
     
-    def recu_divis(self, num)-> int: 
-        pass
+    #def recu_divis(self, num)-> int: 
+        #pass
         
 
 app().mainloop()
